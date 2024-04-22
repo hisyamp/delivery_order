@@ -23,6 +23,9 @@ RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local
 # Copy composer.json and composer.lock
 COPY composer.json composer.lock ./
 
+# Update project dependencies
+RUN composer update --no-scripts --no-autoloader
+
 # Install project dependencies
 RUN composer install --no-scripts --no-autoloader
 
