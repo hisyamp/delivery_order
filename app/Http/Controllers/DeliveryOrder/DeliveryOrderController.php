@@ -31,9 +31,11 @@ class DeliveryOrderController extends Controller
     {
         $role = auth::user()->role;
         $provinces = DB::table('tbl_kodepos')->select('provinsi')->distinct()->get();
-        // dd($provinces);
+        $apiKey = env('API_KEY');
+        
         $delivery_order = DeliveryOrder::all();
-        return view('delivery_order.form_delivery_order',compact('role','delivery_order','provinces'));
+        // dd($delivery_order);
+        return view('delivery_order.form_delivery_order',compact('role','delivery_order','provinces','apiKey'));
     }
 
     public function api_log_delivery_order()
@@ -67,7 +69,10 @@ class DeliveryOrderController extends Controller
     public function delivery_order_by_id($id)
     {
         // $data = DeliveryOrder::where('created_at','=',$time)->get();
-        $data = DeliveryOrder::find($id);
+        $data = DeliveryOrder::select('delivery_order.*','tk.kelurahan as kelurahan_from','tk.kecamatan as kecamatan_from','tk.provinsi as provinsi_from','tk.kabupaten as kabupaten_from','tk2.kelurahan as kelurahan_to','tk2.kecamatan as kecamatan_to','tk2.provinsi as provinsi_to','tk2.kabupaten as kabupaten_to')
+        ->join('tbl_kodepos as tk', 'tk.kodepos', '=', 'delivery_order.postalcode_from')
+        ->join('tbl_kodepos as tk2', 'tk2.kodepos', '=', 'delivery_order.postalcode_to')
+        ->where("delivery_order.id","=",$id)->first();
         return response()->json($data);
     }
 }

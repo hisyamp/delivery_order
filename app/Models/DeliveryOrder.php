@@ -26,6 +26,8 @@ class DeliveryOrder extends Model
         'tanggal_approval',
         'delivery_date',
         'price',
+        'weight',
+        'value',
         'courier',
         'service_type',
         'deleted_at',

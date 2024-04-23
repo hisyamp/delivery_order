@@ -4,7 +4,7 @@
 <div class="card m-10 p-10">
         <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
         <!--begin:Form-->
-        <form id="form" class="form" action="{{ route('register') }}" method="POST">
+        <form id="form" class="form" action="#" method="POST">
             {{ csrf_field() }}
 
                 <!--begin::Heading-->
@@ -52,6 +52,31 @@
                     <!--end::Col-->
                 </div>
 
+                
+                <div class="row g-9 mb-8">
+                    <!--begin::Col-->
+                    <div class="col-md-6 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Value</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Value"></i>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Value" name="value" id="value" />
+                    </div>
+                    <!--end::Col-->
+                    <!--begin::Col-->
+                    <div class="col-md-6 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Weight</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Weight"></i>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Weight" name="weight" id="weight"/>
+                    </div>
+                    <!--end::Col-->
+                </div>
+
+
                 <div class="row g-9 mb-8">
                     <!--begin::Col-->
                     <div class="col-md-6 fv-row">
@@ -97,6 +122,10 @@
                     <input type="text" class="form-control form-control-solid" placeholder="Click Here" name="delivery_to" id="delivery_to"/>
                 </div>
 
+                
+                <div class="d-flex flex-column fv-row mt-2" style="display:none">
+                    <div class="btn btn-info" id="courier_check">Courier Check</div>
+                </div>
 
                 <div class="d-flex flex-column  fv-row mt-2 subm" style="display:none">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -124,7 +153,7 @@
                         <button class="btn btn-success" id="submit-button">Submit</button>
                     </div>
                 </div>
-            </form>
+        </form>
             <!--end:Form-->
         <!--end:Form-->
         </div>
@@ -255,6 +284,58 @@
         }
 
 
+    }
+
+    function requestRates(apikey,postalcode_from,postalcode_to,item_name,item_notes,item_value,item_weight,item_qty){
+        var dataForm = {
+            "origin_postal_code": parseInt(postalcode_from),
+            "destination_postal_code": parseInt(postalcode_to),
+            "couriers": "anteraja,jne,sicepat",
+            "items": [
+                {
+                "name": item_name,
+                "description": item_notes,
+                "value": parseInt(item_value),
+                "weight": parseInt(item_weight),
+                "quantity": parseInt(item_qty)
+                }
+            ]
+        }
+        console.log(dataForm)
+        // return false
+        $.ajax({
+            type: "POST", 
+            url: "https://api.biteship.com/v1/rates/couriers",
+            dataType: "json",
+            headers: {
+            'authorization': apikey,
+            "Content-Type": "application/json",
+            },
+            data: JSON.stringify(dataForm),
+            success: function(result) {
+                console.log("resultAPI",result)
+                let arrayService = []
+                for (let o = 0; o < result.pricing.length; o++) {
+                    const name = `${result.pricing[o].courier_name} - ${result.pricing[o].price} - ${result.pricing[o].service_type}`;
+                    const tipe = result.pricing[o].service_type;
+                    const isValueInArray = arrayService.includes(tipe);
+                    var objectValue = {
+                        courier: result.pricing[o].courier_name,
+                        price: result.pricing[o].price,
+                        service_type: result.pricing[o].service_type
+                    }
+                    let value = JSON.stringify(objectValue);            
+                    var option = $('<option>').text(name).val(value);
+                    $('#delivery').append(option);
+                    arrayService.push(tipe)            
+                }
+            },
+            error: function(xhr, ajaxOptions, thrownError) {
+                Swal.fire("Error!", xhr + " " + ajaxOptions + " " +
+                    thrownError,
+                    "error");
+            }
+        });
     }
 
   $(document).ready(function () {
@@ -2297,22 +2378,7 @@
     })
 
     $('#villages').change(function(){
-        console.log("val",$(this).val())
-        let arrayService = []
-        for (let o = 0; o < response_rates_couriers.pricing.length; o++) {
-            const name = `${response_rates_couriers.pricing[o].courier_name} - ${response_rates_couriers.pricing[o].price} - ${response_rates_couriers.pricing[o].service_type}`;
-            const tipe = response_rates_couriers.pricing[o].service_type;
-            const isValueInArray = arrayService.includes(tipe);
-            var objectValue = {
-                courier: response_rates_couriers.pricing[o].courier_name,
-                price: response_rates_couriers.pricing[o].price,
-                service_type: response_rates_couriers.pricing[o].service_type
-            }
-            let value = JSON.stringify(objectValue);            
-            var option = $('<option>').text(name).val(value);
-            $('#delivery').append(option);
-            arrayService.push(tipe)            
-        }
+        
     })
 
     $('#delivery_type').change(function(){
@@ -2381,6 +2447,23 @@
         $("#delivery_to").val(address_to)
         $('#modal-courier').modal('hide')
         console.log(data)
+    })
+
+    $('#courier_check').click(function() {
+        // console.log("val",$(this).val())
+        var apiKey = `{{ $apiKey }}`;
+        // item_notes,item_value,item_weight,item_qty
+        requestRates(
+            apiKey,
+            postalcode_origin,
+            postalcode_destination,
+            $("#item").val(),
+            $("#notes").val(),
+            $("#value").val(),
+            $("#weight").val(),
+            $("#qty").val(),
+        )
+ 
     })
 
     $('body').on('click', '#save-button', function() {
@@ -2479,7 +2562,7 @@
                             "error");
                     }
                 });
-                // deleteLocalData('myData')
+                deleteLocalData('myData')
                 Swal.fire({
                     title: "Saved!",
                     text: "Your data has been submitted.",

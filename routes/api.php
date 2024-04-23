@@ -14,18 +14,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
 
-Route::post('/apilogin', [App\Http\Controllers\API\auth\AuthController::class,'login']);
+Route::post('/login', [App\Http\Controllers\API\auth\AuthController::class,'login']);
 Route::middleware('jwt.auth')->group(function() {
-    Route::get('/apitoskd2/{ju}', [App\Http\Controllers\API\SKD\API_SkdController::class,'getSoalTryout']);
-    Route::get('/apitoskd/{ju}', [App\Http\Controllers\API\SKD\API_SkdController::class,'detailPaket']);
-    Route::get('/apilatsoal/{ju}', [App\Http\Controllers\API\SKD\API_SkdController::class,'apiLatRandSkd']);
-    Route::get('/allskd', [App\Http\Controllers\API\SKD\API_SkdController::class,'allskd']);
-    Route::get('/getpaket/{ju}/{js}', [App\Http\Controllers\API\SKD\API_SkdController::class,'getpaket']);
-    Route::get('/detaildatapaket/{id}', [App\Http\Controllers\API\SKD\API_SkdController::class,'detailDataPaket']);
+    Route::get('/delivery_order_by_status/{status}', [App\Http\Controllers\API\DeliveryOrder\DeliveryOrderController::class,'delivery_order_by_status']);
+    Route::get('/delivery_order_all', [App\Http\Controllers\API\DeliveryOrder\DeliveryOrderController::class,'delivery_order_all']);
+    Route::post('/approval', [App\Http\Controllers\API\DeliveryOrder\DeliveryOrderController::class,'approval']);
+    Route::get('/delivery_order_by_id/{id}', [App\Http\Controllers\API\DeliveryOrder\DeliveryOrderController::class,'delivery_order_by_id']);
 });
 
 

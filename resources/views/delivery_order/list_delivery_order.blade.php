@@ -10,8 +10,8 @@
                 <th class="text-center">Item</th>
                 <th class="text-center">Qty</th>
                 <th class="text-center">Um</th>
+                <th class="text-center">Ship To</th>
                 <th class="text-center">Status</th>
-                <th class="text-center">Address</th>
                 <th class="text-center">Action</th>
             </tr>
         </thead>
@@ -44,116 +44,162 @@
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
 
                 <!--begin:Form-->
-                <form id="form-regist" class="form" method="POST">
-                {{ csrf_field() }}
+                <form id="form" class="form" action="#" method="POST">
+                    {{ csrf_field() }}
 
-                    <!--begin::Heading-->
-                    <div class="mb-13 text-center">
-                        <!--begin::Title-->
-                        <h1 class="mb-3">Detail Delivery Order</h1>
-                        <!--end::Title-->
-                        <!--begin::Description-->
-                        <!-- <div class="text-muted fw-bold fs-5">If you need more info, please check -->
-                        <!-- <a href="#" class="fw-bolder link-primary">Project Guidelines</a>.</div> -->
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Heading-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column fv-row mb-2">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Item</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nama Lengkap"></i>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Masukkan Nama Item" name="item" id="item" readonly="true"/>
-                    </div>
-
-                    <div class="d-flex flex-column fv-row mb-2">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Ship To</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ship To" readonly="true"></i>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Masukkan Ship To" name="ship_to" id="ship_to" readonly="true"/>
-                    </div>
-
-                    <div class="d-flex flex-column fv-row mb-2">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Address</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Address" readonly="true"></i>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Masukkan Address" name="address" id="address" readonly="true"/>
-                    </div>
-
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-3">Form Delivery Order</h1>
+                            <!--end::Title-->
+                            <!--begin::Description-->
+                            <!-- <div class="text-muted fw-bold fs-5">If you need more info, please check -->
+                            <!-- <a href="#" class="fw-bolder link-primary">Project Guidelines</a>.</div> -->
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Unit of Measurement</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Jumlah" readonly="true"></i>
+                                <span class="required">Item</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Nama Lengkap"></i>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Unit of Measurement" name="um" id="um" readonly="true"/>
+                            <input type="text" class="form-control form-control-solid" placeholder="Type Here" name="item" id="item" readonly="true"/>
                         </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Ship To</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Satuan"></i>
-                            </label>
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Masukkan Tujuan Pengiriman" name="ship_to" id="ship_to" readonly="true"/>
+
+                        <div class="row g-9 mb-8">
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Qty</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Qty"></i>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Type Here" name="qty" id="qty" readonly="true"/>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Unit of Measurement</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Jumlah"></i>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Type Here" name="um" id="um" readonly="true"/>
+                            </div>
+                            <!--end::Col-->
                         </div>
-                        <!--end::Col-->
-                    </div>
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Status Approval</span>
-                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Status Approval"></i>
-                            </label>
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Status Approval" name="status" id="status" readonly="true" />
-                        </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
+
+                
+                <div class="row g-9 mb-8">
+                    <!--begin::Col-->
                     <div class="col-md-6 fv-row">
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Tanggal Pengiriman</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Tanggal Pengembalian"></i>
+                            <span class="required">Value</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Value"></i>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Tanggal Pengembalian" name="tanggal_pengembalian" id="tanggal_pengembalian" readonly="true"/>
+                        <input type="text" class="form-control form-control-solid" placeholder="Value" name="value" id="value" readonly="true"/>
+                    </div>
+                    <!--end::Col-->
+                    <!--begin::Col-->
+                    <div class="col-md-6 fv-row">
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Weight</span>
+                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Weight"></i>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Weight" name="weight" id="weight" readonly="true"/>
+                    </div>
+                    <!--end::Col-->
+                </div>
+
+
+                        <div class="row g-9 mb-8">
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Ship To</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Ship To"></i>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Ship To" name="ship_to" id="ship_to" readonly="true"/>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-6 fv-row">
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Delivery Date</span>
+                                    <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Delivery Date"></i>
+                                </label>
+                                <!--end::Label-->
+                                <input type="date" class="form-control form-control-solid" placeholder="Delivery Date" name="delivery_date" id="delivery_date" readonly="true"/>
+                            </div>
+                            <!--end::Col-->
                         </div>
-                        <!--end::Col-->
-                    </div>
 
-                    <div class="d-flex flex-column fv-row mb-2">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Notes</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Notes"></i>
-                        </label>
-                        <!--end::Label-->
-                        <textarea class="form-control form-control-solid"  id="notes" cols="30" rows="3" readonly="true"></textarea>
-                    </div>
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Delivery From</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Delivery From"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Click Here" name="delivery_from" id="delivery_from" readonly="true"/>
+                        </div>
 
-                    <div class="d-flex flex-column  fv-row mb-12">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Reason Approval</span>
-                            <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Reason Approval"></i>
-                        </label>
-                        <!--end::Label-->
-                        <textarea class="form-control form-control-solid"  id="reason_approval" name="reason_approval" cols="30" rows="3" readonly="true"></textarea>
-                    </div>
+                        <!--begin::Input group-->
+                        <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Delivery To</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Delivery To"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Click Here" name="delivery_to" id="delivery_to" readonly="true"/>
+                        </div>
 
+                        <div class="d-flex flex-column  fv-row mt-2 subm" style="display:none">
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Delivery Option</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Delivery Type"></i>
+                            </label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Click Here" name="delivery" id="delivery" readonly="true"/>
+
+                        </div>
+
+                         <!--begin::Input group-->
+                         <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Status</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Status"></i>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid" placeholder="Status" name="status" id="status" readonly="true"/>
+                        </div>
+
+                        <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Notes</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Notes"></i>
+                            </label>
+                            <!--end::Label-->
+                            <textarea class="form-control form-control-solid" name="notes" id="notes" cols="30" rows="3" readonly="true"></textarea>
+                        </div>
+                        <div class="d-flex flex-column fv-row mb-2">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Approval Reason</span>
+                                <i class="fas fa-exclamation-circle ms-2 fs-7" data-bs-toggle="tooltip" title="Notes"></i>
+                            </label>
+                            <!--end::Label-->
+                            <textarea class="form-control form-control-solid" name="reason_approval" id="reason_approval" cols="30" rows="3" readonly="true"></textarea>
+                        </div>
                 </form>
                 <!--end:Form-->
             </div>
@@ -2113,6 +2159,7 @@
             }
         ]
     }
+    
     $('#table').DataTable({
       processing: true,
       serverSide: true,
@@ -2123,13 +2170,7 @@
              return meta.row + meta.settings._iDisplayStart + 1;
            },
            className: 'dt-body-center',
-        },<th class="text-center">No</th>
-                <th class="text-center">Item</th>
-                <th class="text-center">Qty</th>
-                <th class="text-center">Um</th>
-                <th class="text-center">Status</th>
-                <th class="text-center">Address</th>
-                <th class="text-center">Action</th>
+        },     
         {
            data: 'item',
            className: 'dt-body-center',
@@ -2146,15 +2187,16 @@
            defaultContent: '',
         },
         {
-           data: 'status',
+           data: 'ship_to',
            className: 'dt-body-center',
            defaultContent: '',
         },
         {
           "render": function ( data, type, row ) {
-             if(row.status=="A")return 'menunggu'
-             else if(row.status=="B")return 'ditolak'
-             else if(row.status=="C")return 'disetujui'
+             if(row.status=="wait")return 'Wait'
+             else if(row.status=="reject")return 'Rejected'
+             else if(row.status=="revise")return 'Revise'
+             else if(row.status=="approve")return 'Approved'
              else return '-'
            },
            className: 'dt-body-center',
@@ -2168,6 +2210,7 @@
         }
       ],
     });
+
     var id_laporan
     $('body').on('click', '.btn-detail', function() {
         var dataid = $(this).data('id')
@@ -2185,8 +2228,15 @@
                     $('#qty').val(response.qty)
                     $('#um').val(response.um)
                     $('#ship_to').val(response.ship_to)
+                    $('#delivery_from').val(`${response.provinsi_from}-${response.kabupaten_from}-${response.kecamatan_from}-${response.kelurahan_from}`)
+                    $('#delivery_to').val(`${response.provinsi_to}-${response.kabupaten_to}-${response.kecamatan_to}-${response.kelurahan_to}`)
+                    $('#delivery').val(`${response.courier}-${response.price}-${response.service_type}`)
                     $('#address').val(response.address)
+                    $('#weight').val(response.weight)
+                    $('#value').val(response.value)
                     $('#notes').val(response.notes)
+                    $('#delivery_date').val(response.delivery_date)
+                    $('#reason_approval').val(response.reason_approval)
                     $('#status').val(response.status)
                     $('#reason_approval').val(response.reason_approval)
                     $('#tgl_delivery').val(response.tgl_delivery)
@@ -2201,75 +2251,8 @@
             }
         });
     })
-    $('body').on('click', '#btn-reject', function() {
-        event.preventDefault();
-        dataId = $(this).attr('data-id');
-        // console.log(dataId)
-        Swal.fire({ 
-            title: "Konfirmasi",
-            text: "Apakah yakin menolak pengembalian barang ini ?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: `Tolak`,
-        }).then(function(result) {
-            if (result.value) {
-                $.ajax({
-                    type: "POST", 
-                    url: `{{ url('/actionbarang/${id_laporan}/B') }}`,
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Harap Tunggu',
-                            text: "Data sedang diproses",
-                            icon: 'info',
-                            timer: 4000,
-                            didOpen: () => {
-                                Swal.showLoading()
-                                timerInterval = setInterval(() => {
-                                    const content = Swal
-                                        .getContent()
-                                    if (content) {
-                                        const b = content
-                                            .querySelector(
-                                                'b')
-                                        if (b) {
-                                            b.textContent =
-                                                Swal
-                                                .getTimerLeft()
-                                        }
-                                    }
-                                }, 300)
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                            },
-                        });
-                    },
-                    success: function(result) {
-                        Swal.fire({
-                            title: "Sukses!",
-                            text: "Pengembalian berhasil ditolak !",
-                            icon: "success",
-                            confirmButtonText: `OK`,
-                        }).then((ok) => {
-                            if (ok.value) {
-                                console.log("sukses")
-                            }
-                        });
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        Swal.fire("Error!", xhr + " " + ajaxOptions + " " +
-                            thrownError,
-                            "error");
-                    }
-                });
-            } else {
-                return false;
-            }
-        });        
-    });
+    
+    
     $('body').on('click', '#tesmodal', function() {
         console.log("111")
         $('#modal-courier').modal('show')
@@ -2306,75 +2289,7 @@
 
         $('#couriers-component').append(items)
     })
-    $('body').on('click', '#btn-approve', function() {
-        event.preventDefault();
-        dataId = $(this).attr('data-id');
-        console.log(dataId)
-        Swal.fire({ 
-            title: "Konfirmasi",
-            text: "Apakah yakin menyetujui pengembalian barang ini ?",
-            icon: "warning",
-            showCancelButton: true,
-            confirmButtonText: `Ubah`,
-        }).then(function(result) {
-            if (result.value) {
-                $.ajax({
-                    type: "POST",
-                    url: `{{ url('/actionbarang/${id_laporan}/C') }}`,
-                    data: {
-                        "_token": "{{ csrf_token() }}",
-                    },
-                    beforeSend: function() {
-                        Swal.fire({
-                            title: 'Harap Tunggu',
-                            text: "Upload dokumen sedang diproses",
-                            icon: 'info',
-                            timer: 4000,
-                            didOpen: () => {
-                                Swal.showLoading()
-                                timerInterval = setInterval(() => {
-                                    const content = Swal
-                                        .getContent()
-                                    if (content) {
-                                        const b = content
-                                            .querySelector(
-                                                'b')
-                                        if (b) {
-                                            b.textContent =
-                                                Swal
-                                                .getTimerLeft()
-                                        }
-                                    }
-                                }, 300)
-                            },
-                            willClose: () => {
-                                clearInterval(timerInterval)
-                            },
-                        });
-                    },
-                    success: function(result) {
-                        Swal.fire({
-                            title: "Sukses!",
-                            text: "Status aktivasi berhasil diubah !",
-                            icon: "success",
-                            confirmButtonText: `OK`,
-                        }).then((ok) => {
-                            if (ok.value) {
-                                console.log("sukses")
-                            }
-                        });
-                    },
-                    error: function(xhr, ajaxOptions, thrownError) {
-                        Swal.fire("Error!", xhr + " " + ajaxOptions + " " +
-                            thrownError,
-                            "error");
-                    }
-                });
-            } else {
-                return false;
-            }
-        });        
-    });
+
   
   });
   
